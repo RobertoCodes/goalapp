@@ -7,7 +7,19 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
-  has_many :goals 
+  has_many :goals
+
+  has_many :received_comments,
+    class_name: "UserComment",
+    foreign_key: :recipient_id,
+    primary_key: :id
+
+  has_many :sent_comments,
+    class_name: "UserComment",
+    foreign_key: :author_id,
+    primary_key: :id
+
+
 
   def password=(password)
     @password = password
