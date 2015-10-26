@@ -44,7 +44,7 @@ feature "the signup process" do
     it "doesn't show username on the homepage after logout" do
       sign_up_as_superman
       sign_in_as_superman
-      # click_button "Sign Out"
+      click_button "Sign Out"
       expect(page).not_to have_content "superman"
     end
   end

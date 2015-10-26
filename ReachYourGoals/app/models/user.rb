@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  has_many :goals 
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
@@ -30,6 +32,7 @@ class User < ActiveRecord::Base
 
   def reset_session_token!
     self.session_token = SecureRandom::urlsafe_base64
+    self.save!
   end
 
   private

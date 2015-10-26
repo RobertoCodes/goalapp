@@ -59,6 +59,14 @@ RSpec.configure do |config|
     fill_in "Password", with: "password"
     click_button 'Sign In'
   end
+
+  def make_goal
+    sign_up_as_superman
+    sign_in_as_superman
+    visit "/goals/new"
+    fill_in "Description", with: "lose 20 lbs"
+    click_button "Create Goal"
+  end
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin

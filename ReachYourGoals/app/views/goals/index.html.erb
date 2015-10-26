@@ -1,0 +1,29 @@
+<h1>All Goals</h1>
+
+<% @goals.each do |goal| %>
+  <ul>
+    <% next if goal.private && (current_user.nil? || current_user.id != goal.user_id) %>
+    <li>
+      <%= goal.user.username %>
+      <%= goal.name %>
+      <%= goal.completed ? "Completed" : "Not Completed" %>
+      <% unless goal.completed %>
+            <form action="<%= goal_url(goal) %>" method="POST">
+            <input
+              type="hidden"
+              name="authenticity_token"
+              value="<%= form_authenticity_token %>">
+
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="hidden" name="goal[completed]" value="true">
+            <input type="submit" value="Goal Completed">
+
+            </form>
+            <% end %>
+
+    </li>
+  </ul>
+<% end %>
+
+
+<%= link_to "New Goal", new_goal_url %>
