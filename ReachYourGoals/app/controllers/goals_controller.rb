@@ -1,5 +1,7 @@
 class GoalsController < ApplicationController
 
+  before_action :require_logged_in, only: [:new,:create,:update]
+
   def index
     @goals = Goal.all
     render :index
@@ -13,7 +15,7 @@ class GoalsController < ApplicationController
   def create
     @goal = current_user.goals.new(goal_params)
     if @goal.save
-      redirect_to goals_url
+      redirect_to goal_url(@goal)
     else
       flash.now[:errors] = @goal.errors.full_messages
       render :new
@@ -29,6 +31,10 @@ class GoalsController < ApplicationController
     end
   end
 
+  def show
+    @goal = Goal.find(params[:id])
+    render :show
+  end
 
   private
 

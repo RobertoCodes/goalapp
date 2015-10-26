@@ -5,9 +5,9 @@
     <% next if goal.private && (current_user.nil? || current_user.id != goal.user_id) %>
     <li>
       <%= link_to goal.user.username, user_url(goal.user) %>
-      <%= goal.name %>
+      <%= link_to goal.name, goal_url(goal) %>
       <%= goal.completed ? "Goal Completed!" : "Not Completed" %>
-      <% unless goal.completed %>
+      <% if !goal.completed && current_user == goal.user   %>
             <form action="<%= goal_url(goal) %>" method="POST">
             <input
               type="hidden"

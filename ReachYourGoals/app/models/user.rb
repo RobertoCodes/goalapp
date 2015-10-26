@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
     foreign_key: :author_id,
     primary_key: :id
 
+    has_many :goal_comments,
+      class_name: "GoalComment",
+      foreign_key: :author_id,
+      primary_key: :id
 
 
   def password=(password)

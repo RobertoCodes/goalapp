@@ -20,9 +20,9 @@ feature "Add goal for user" do
     expect(page).to have_content "Description"
   end
 
-  it "redirects to goal index page on successful creation" do
+  it "redirects to goal show page on successful creation" do
     make_goal
-    expect(page).to have_content "All Goals"
+    expect(page).to have_content "lose 20 lbs"
   end
 end
 
@@ -30,11 +30,13 @@ feature "Goal index page" do
 
   it "displays all public and current user goals" do
     make_goal
+    visit "/goals"
     expect(page).to have_content "lose 20 lbs"
   end
 
   it "displays if a goal has been completed" do
     make_goal
+    visit "/goals"
     expect(page).to have_content "Not Completed"
   end
 
@@ -47,6 +49,7 @@ feature "Goal index page" do
 
   it "changes goal status to completed when 'complete' button is clicked" do
     make_goal
+    visit "/goals"
     click_button "Completed"
     expect(page).to have_content "Goal Completed!"
   end
